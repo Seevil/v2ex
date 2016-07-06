@@ -1,0 +1,36 @@
+{include h}
+    <div id="Wrapper">
+      <div class="contents">
+        <div id="Leftbar"></div>
+        <div id="Rightbar">
+          <div class="sep20"></div>
+        </div>
+        <div id="Main">
+          <div class="sep20"></div>
+          <div class="searchs">
+            <div class="cell" style="background-color: #fff; border-top-left-radius: 3px; border-top-right-radius: 3px;" id="Tabs">
+              <span class="tab_current">搜索结果：</span>
+           </div>
+                {hook t_search_index_thread_list_top}
+    {foreach $data as $v}
+    <div class="cell from_166543 hot_t_281078">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tbody><tr>
+            <td width="24" valign="middle" align="center">
+                <a href="{php echo WWW.URL('my',$v['user']);}"><img src="{#WWW}{$v.avatar.b}" class="avatar" border="0" align="default" style="max-width: 24px; max-height: 24px;"></a>
+            </td>
+            <td width="10"></td>
+            <td width="auto" valign="middle">
+                <span class="item_hot_topic_title">
+                <a href="{php echo WWW.URL('thread','',EXP.$v['id']);}">{$v.title}</a>
+                </span>
+            </td>
+        </tr>
+    </tbody></table>
+    </div>
+    {/foreach}
+    {hook t_search_index_thread_list_bottom}
+ </div>
+</div>
+ </div>
+{include f}
