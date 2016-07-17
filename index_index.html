@@ -212,8 +212,7 @@
             <div class="cell">
               <div class="fr">
                 <a href="/">浏览全部节点</a></div>
-              <span class="fade">
-                <strong>V2EX</strong>/ 节点导航</span></div>
+              <span class="fade">{$conf.title} / 节点导航</span></div>
            {foreach $forum as $v}
            {if $v['fid']== -1}
             <div class="cell" >
@@ -224,7 +223,7 @@
                     {foreach $forum as $z}
                     {if $v['id'] == $z['fid']}
                   <td style="line-height: 200%; padding-left: 10px; word-break: keep-all;">
-                   <a href="/f/{$z.id}" style="font-size: 14px;">{$z.name}</a>&nbsp; &nbsp;               
+                   <a href="/f/{$z.id}" style="font-size: 14px;">{$z.name}</a>&nbsp;               
                     </td> 
                     {/if}
                    {/foreach}</tr>
