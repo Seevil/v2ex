@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
   <head>
     <meta charset="UTF-8" />
     <title>登录 {$conf.title2}</title>
@@ -13,9 +13,9 @@
     <!--[if lte IE 8 ]>
     <script src="{#WWW}public/js/jquery1.11.3.min.js"></script>
     <![endif]-->
-	<link href="{#WWW}public/css/alert.css" rel="stylesheet">
-	<script src="{#WWW}public/js/sweet-alert.min.js"></script>
+  <link href="{#WWW}public/css/alert.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{#WWW}View/v2ex/css/icomoon.css" />
+  <script src="{#WWW}public/js/sweet-alert.min.js"></script>
 {hook t_user_login_header}
   </head>
   <body>
@@ -49,7 +49,7 @@
 <div class="box">
 <div class="header">其他登录方式</div>
 <div class="cell" style="text-align: center;">
-<a href="{#WWW}user{#EXP}qqlogin" class="qq-signin"><span class="icon-qq"></span>&nbsp;&nbsp;使用 QQ 登录</a>
+<a onclick="location.href = '{#WWW}user{#EXP}qqlogin';" href="#" class="qq-signin"><span class="icon-qq"></span>&nbsp;&nbsp;使用 QQ 登录</a>
 </div>
 </div>
  </div>

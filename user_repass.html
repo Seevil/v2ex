@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>注册 {$conf.title2}</title>
+    <title>找回密码 {$conf.title2}</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <meta name="Keywords" content="{$conf.keywords}">
     <meta name="Description" content="{$conf.description}">
@@ -15,7 +15,7 @@
     <script src="{#WWW}public/js/jquery1.11.3.min.js"></script>
     <![endif]-->
   <script src="{#WWW}public/js/sweet-alert.min.js"></script>
-  {hook t_user_add_header}
+  {hook t_user_repass_header}
   </head>
   <body>
     <div id="Top">
@@ -25,7 +25,7 @@
             <tr>
               <td width="110" align="left">
                 <a href="{#WWW}" name="top" title="{$conf.title}">
-                  <img src="{#WWW}View/v2ex/images/logo@2x.png" border="0" align="default" alt="V2EX" width="94" height="30" /></a>
+                  <img src="{#WWW}View/v2ex/images/logo@2x.png" border="0" align="default" alt="{$conf.logo}" width="94" height="30" /></a>
               </td>
               <td width="auto" align="left">
                         <div id="Search"><form action="{#WWW}search"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-image: url('{#WWW}View/v2ex/images/qbar_light@2x.png'); background-repeat: no-repeat; display: inline-block;"><input type="text" maxlength="40" name="key" id="q" value=""></div></form></div>
@@ -65,59 +65,90 @@
 <div class="sep20"></div>
                 
 <div class="box">
-    <div class="header"><a href="/">首页</a> <span class="chevron">&nbsp;›&nbsp;</span> 注册</div>
+    <div class="header"><a href="/">首页</a> <span class="chevron">&nbsp;›&nbsp;</span>找回密码</div>
     
     <div class="inner">
         <form id="form">
         <table cellpadding="5" cellspacing="0" border="0" width="100%">
-        {hook t_user_login_5}
+        {hook t_user_login_8}
             <tr>
-                <td width="120" align="right" valign="top"><div class="sep5"></div>用户名</td>
-                <td width="auto" align="left"><input type="text" class="sl" name="user" value=""/><div class="sep5"></div><span class="fade">请使用半角的 a-z 或数字 0-9</span></td>
+                <td width="120" align="right" valign="top"><div class="sep5"></div>邮箱地址</td>
+                <td width="auto" align="left"><input type="text" class="sl" name="email" value=""/><div class="sep5"></div><span class="fade">你注册账号所填的邮箱</span></td>
             </tr>
             <tr>
-                <td width="120" align="right">密码</td>
-                <td width="auto" align="left"><input type="password" class="sl" name="pass1" value=""/></td>
+                <td width="120" align="right" valign="top"><div class="sep5"></div>邮箱验证码</td>
+                <td width="auto" align="left"><input type="text" class="sl" name="code" value=""/><div class="sep5"></div><small><a onclick="send_code(this)" href="javascript:void(0)" style="color: #46699E;">点击获取验证码</a></small></td>
             </tr>
             <tr>
-                <td width="120" align="right" valign="top">确定密码</td>
-                <td width="auto" align="left"><input type="password" class="sl" name="pass2" value=""/><div class="sep5"></div><span class="fade">请再次输入密码</span></td>
+                <td width="120" align="right" valign="top">更改密码</td>
+                <td width="auto" align="left"><input type="password" class="sl" name="pass2" value=""/><div class="sep5"></div><span class="fade">请输入新密码</span></td>
             </tr>
             <tr>
-                <td width="120" align="right" valign="top"><div class="sep5"></div>电子邮件</td>
-                <td width="auto" align="left"><input type="text" class="sl" name="email" value=""/><div class="sep5"></div><span class="fade">请使用真实电子邮箱注册，我们不会将你的邮箱地址分享给任何人</span></td>
-            </tr>
-            <tr>
-                <td width="120" align="right"></td>
-                <td width="auto" align="left">{hook t_user_login_2}</td>
+                <td width="120" align="right" valign="top">确认密码</td>
+                <td width="auto" align="left"><input type="password" class="sl" name="pass2" value=""/><div class="sep5"></div><span class="fade">请再次输入新密码</span></td>
             </tr>
             <tr>
                 <td width="120" align="right"></td>
-                <td width="auto" align="left"><input id="login" type="submit" class="super normal button" value="注册" /></td>
+                <td width="auto" align="left">{hook t_user_login_9}</td>
             </tr>
+            <tr>
+                <td width="120" align="right"></td>
+                <td width="auto" align="left"><input id="repass" type="submit" class="super normal button" value="修改" /></td>
+            </tr>
+            {hook t_user_login_10}
         </table>
         </form>
     </div>
 </div>
 <script>
+var send_b = false;
+function send_code(obj){
+  // if(send_b)
+  //  return ;
+   var _this = $(obj);
+  // send_b=true;
+  
+  
+  //_this.attr("disabled","disabled");
+  //_this.css("color","#757575");
+  $.ajax({
+    url: '{#WWW}user{#EXP}recode',
+    type:"POST",
+    cache: false,
+    data:{
+      email:$("#email").val(),
+      {hook t_user_repass_js_1}
+    },
+    dataType: 'json'
+  }).then(function(e) {
+    {hook t_user_repass_js_2}
+    if(e.error){
+      swal("发送成功","请到你的"+$("#email").val()+"查看邮件获得验证码,可能邮件会被放入垃圾箱或已删除",'success');
+    }else{
+      swal('发送失败',e.info,'error');
+    }
+    {hook t_user_repass_js_3}
+  }, function() {
+   swal("发送失败",'服务器繁忙');
+  });
+    
+}
 $(function(){
     $('#form').submit(function() {return false;});
-    $("#login").click(function(){
+    $("#repass").click(function(){
         var postdata = $('#form').serialize();
-        {hook t_user_add_js_1}
-        $.post("{#WWW}user{#EXP}add", postdata,  function(e){
-            {hook t_user_add_js_2}
+        {hook t_user_repass_js_4}
+        $.post("{#WWW}user{#EXP}recode2", postdata,  function(e){
+          {hook t_user_repass_js_5}
             if(e.error){
-                window.location.href="{#WWW}";
+                swal("修改成功","密码修改成功,请自行登录!",'success');
             }else{
-                swal(e.error ? "注册成功 - 正在为你登录" : "注册失败", e.info, e.error ? "success" : "error");
+              swal("修改失败", e.info, "error");
             }
-            {hook t_user_add_js_3}
+            {hook t_user_repass_js_6}
         },'json');
-        {hook t_user_add_js_4}
-
+        {hook t_user_repass_js_7}
     })
-
 });
 </script>
  </div>

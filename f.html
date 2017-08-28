@@ -5,20 +5,29 @@
       <div class="content">
         <div class="inner">
           <div class="sep10"></div>
-          
           <strong>
-            <a href="" class="dark" target="_self">关于</a>&nbsp;
-            <span class="snow">·</span>&nbsp;
-            <a href="" class="dark" target="_self">FAQ</a>&nbsp;
-            <span class="snow">·</span>&nbsp;
-            <a href="" class="dark" target="_self">API</a>&nbsp;
-            <span class="snow">·</span>&nbsp; {$hy_count.clien} 人在线</strong>&nbsp;
-          <span class="snow">·</span>&nbsp;
-          <div class="sep20"></div>创意工作者们的社区
+          {if view_form('v2ex','diy_f')}
+		  {php $tmp = explode("\r\n",view_form('v2ex','diy_f'))}
+        {foreach $tmp as $v}
+		{php $tmp1 = explode(",",$v)}
+			<a href="{$tmp1[0]}" class="dark" {if $tmp1[2]==1}target="_blank"{/if}>{$tmp1[1]}</a>&nbsp;&nbsp;<span class="snow">·</span>&nbsp;
+		{/foreach}
+        {/if}
+        {if view_form('v2ex','ol')}{$hy_count.clien} 人在线{/if}
+           </strong>&nbsp;
+          <div class="sep20"></div>{php echo view_form('v2ex','pgdp')}
           <div class="sep20"></div>
           <span class="small fade">VERSION: <?php echo HYBBS_V;?> · <?php echo number_format(microtime(1) - $GLOBALS['START_TIME'], 3); ?>s · UTC +08:00 
-            <br />♥ Powered by <a href="http://bbs.hyyyp.com/" target="_blank">HYBBS</a> Themes by <a href="http://basaltic.cn/">Intern</a> Design by V2EX.</span>
+            <br />♥ Powered by <a href="http://bbs.hyphp.cn/" target="_blank">HYBBS</a> Themes by <a href="http://basaltic.cn/" target="_blank">Intern</a> Design by V2EX.</span>
+             {if view_form('v2ex','gov')}
+            <div class="sep20"></div>
+            <span class="f12 gray"><a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow">{$view_inc.gov}</a></span>
+            <div class="sep20"></div>
+            {/if}
       </div>
     </div>
-  </body>
+    </div>
+{include hy_friend::index}
+{hook t_bottom_box}
+</body>
 </html>

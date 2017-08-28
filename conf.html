@@ -1,0 +1,91 @@
+<div class="form-group">
+    <label for="input1" class="col-lg-2 control-label">站点侧边栏信息设置</label>
+    <div class="col-lg-10">
+        <textarea class="form-control" name="title">{php echo view_form('v2ex','title')}</textarea>
+        <span class="help-block">标题文字</span>
+        <div class="col-lg-10"></div>
+        <textarea class="form-control" name="info">{php echo view_form('v2ex','info')}</textarea>
+        <span class="help-block">描述信息</span>
+    </div>
+</div>
+<div class="form-group">
+    <label for="input1" class="col-lg-2 control-label">站点底部设置</label>
+    <div class="col-lg-10">
+        <textarea class="form-control" name="pgdp">{php echo view_form('v2ex','pgdp')}</textarea>
+        <span class="help-block">设置网页底部的说明信息</span>
+    </div>
+</div>
+<div class="form-group">
+    <label for="input1" class="col-lg-2 control-label">自定义链接</label>
+    <div class="col-lg-10">
+    <span class="help-block">导航栏添加自定义链接</span>
+        <textarea class="form-control" name="diy_h">{php echo view_form('v2ex','diy_h')}</textarea>
+        <span class="help-block">底部添加自定义链接</span>
+        <textarea class="form-control" name="diy_f">{php echo view_form('v2ex','diy_f')}</textarea>
+        <span class="help-block">使用样例: 输入 http://bbs.hyphp.cn,名称,1</span>
+        <span class="help-block">值为: 链接,名称,是否新页面打开1=是 0=当前页面打开</span>
+        <span class="help-block">http://bbs.hyphp.cn,名称,1</span>
+        <span class="help-block">上面这条意思: 自定义链接名称, 跳转http://bbs.hyphp.cn/ 并且新页面打开</span>
+        <span class="help-block">多个链接, 换行输入即可</span>
+
+    </div>
+</div>
+<div class="form-group">
+    <label for="input1" class="col-lg-2 control-label">侧边栏自定义内容</label>
+    <div class="col-lg-10">
+        <textarea class="form-control" name="right">{php echo view_form('v2ex','right')}</textarea>
+        <span class="help-block">侧边栏自定义内容，PS：宽270.</span>
+    </div>
+</div>
+<div class="form-group">
+    <label for="inputEmail1" class="col-lg-2 control-label">底部在线人数统计</label>
+    <div class="col-lg-10">
+        <div class="radio inline-block">
+            <div class="custom-radio m-right-xs">
+                <input type="radio" id="inlineRadio1" {if view_form('v2ex','ol')}checked=""{/if} name="ol" value="1">
+                <label for="inlineRadio1"></label>
+            </div>
+            <div class="inline-block vertical-top">开启</div>
+        </div>
+        <div class="radio inline-block">
+            <div class="custom-radio m-right-xs">
+                <input type="radio" id="inlineRadio2" {if !view_form('v2ex','ol')}checked=""{/if} name="ol" value="0">
+                <label for="inlineRadio2"></label>
+            </div>
+            <div class="inline-block vertical-top">关闭</div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="inputEmail1" class="col-lg-2 control-label">节点导航</label>
+    <div class="col-lg-10">
+        <div class="radio inline-block">
+            <div class="custom-radio m-right-xs">
+                <input type="radio" id="inlineRadio3" {if view_form('v2ex','nav')}checked=""{/if} name="nav" value="1">
+                <label for="inlineRadio3"></label>
+            </div>
+            <div class="inline-block vertical-top">开启</div>
+        </div>
+        <div class="radio inline-block">
+            <div class="custom-radio m-right-xs">
+                <input type="radio" id="inlineRadio4" {if !view_form('v2ex','nav')}checked=""{/if} name="nav" value="0">
+                <label for="inlineRadio4"></label>
+            </div>
+            <div class="inline-block vertical-top">关闭</div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="input1" class="col-lg-2 control-label">发帖页面侧边信息自定义</label>
+    <div class="col-lg-10">
+        <textarea class="form-control" name="postinfo">{php echo view_form('v2ex','postinfo')}</textarea>
+        <span class="help-block">自定义发帖页面侧边内容</span>
+    </div>
+</div>
+<div class="form-group">
+    <label for="input1" class="col-lg-2 control-label">ICP备案信息设置</label>
+    <div class="col-lg-10">
+        <textarea class="form-control" name="gov">{php echo view_form('v2ex','gov')}</textarea>
+        <span class="help-block">网站备案信息显示</span>
+    </div>
+</div>

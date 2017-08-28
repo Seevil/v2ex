@@ -6,17 +6,18 @@
           <div class="sep20"></div>
           {if !IS_LOGIN}
           <div class="box">
+          {php $view_form = get_view_inc("v2ex")}
             <div class="cell">
-              <strong>BASALTIC = Share And Discover</strong>
+              <strong>{$view_form.title}</strong>
               <div class="sep5"></div>
-              <span class="fade">一个关于分享和探索的地方</span></div>
+              <span class="fade">{$view_form.info}</span></div>
             <div class="inner">
               <div class="sep5"></div>
               <div align="center">
-                <a href="{#WWW}user{#EXP}add" class="super normal button">现在注册</a>
+                <a href="{php HYBBS_URL('user','add');}" class="super normal button">现在注册</a>
                 <div class="sep5"></div>
                 <div class="sep10"></div>已注册用户请 &nbsp;
-                <a href="{#WWW}user{#EXP}login">登录</a></div>
+                <a href="{php HYBBS_URL('user','login');}">登录</a></div>
             </div>
           </div>
           {else}
@@ -24,11 +25,11 @@
                         <div class="cell">
                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                 <tbody><tr>
-                                    <td width="48" valign="top"><a href="<?php echo WWW.URL('my',$user['user']);?>"><img src="{#WWW}{$user.avatar.b}?s=48&amp;d=retro" class="avatar" border="0" align="default" style="max-width: 48px; max-height: 48px;"></a></td>
+                                    <td width="48" valign="top"><a href="<?php echo WWW.URL('my',$user['user']);?>"><img src="{#WWW}{$user.avatar.b}" class="avatar" border="0" align="default" style="max-width: 48px; max-height: 48px;"></a></td>
                                     <td width="10" valign="top"></td>
                                     <td width="auto" align="left"><span class="bigger"><a href="<?php echo WWW.URL('my',$user['user']);?>">{$user.user}</a></span>
                                         <div class="sep5"></div>
-                                        <span class="fade">等待更新~</span>
+                                        <span class="fade">{$user.ps}</span>
                                     </td>
                                 </tr>
                             </tbody></table>
@@ -36,8 +37,8 @@
                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                 <tbody><tr>
                                     <td width="33%" align="center"><a href="{php echo WWW.URL('my',$user['user'],EXP.'thread');}" class="dark" style="display: block;"><span class="bigger">{$user.threads}</span><div class="sep3"></div><span class="fade">我的帖子</span></a></td>
-                                    <td width="34%" style="border-left: 1px solid rgba(100, 100, 100, 0.4); border-right: 1px solid rgba(100, 100, 100, 0.4);" align="center"><a href="{php echo WWW.URL('my',$user['user'],EXP.'thread');}" class="dark" style="display: block;"><span class="bigger">{$user.posts}</span><div class="sep3"></div><span class="fade">主题回复</span></a></td>
-                                    <td width="33%" align="center"><a href="{php echo WWW.URL('my',$user['user'],'');}" class="dark" style="display: block;"><span class="bigger">{$user.follow}</span><div class="sep3"></div><span class="fade">特别关注</span></a></td>
+                                    <td width="34%" style="border-left: 1px solid rgba(100, 100, 100, 0.4); border-right: 1px solid rgba(100, 100, 100, 0.4);" align="center"><a href="{php echo WWW.URL('my',$user['user'],EXP.'post');}" class="dark" style="display: block;"><span class="bigger">{$user.posts}</span><div class="sep3"></div><span class="fade">主题回复</span></a></td>
+                                    <td width="33%" align="center"><a href="javascript:void(0)" onclick="$('.friend-box').toggleClass('friend-box-a');" class="dark" style="display: block;"><span class="bigger">{$user.follow}</span><div class="sep3"></div><span class="fade">特别关注</span></a></td>
                                 </tr>
                             </tbody></table>
                         </div>
@@ -50,18 +51,18 @@
                                 </tr>
                             </tbody></table>
                         </div>
-                        <div class="inner"><div class="fr" id="money"><a href="{php echo WWW.URL('my',$user['user'],EXP.'thread');}" class="balance_area" style="">{$user.gold} <img src="{#WWW}View/v2ex/images/gold.png" alt="S" align="absmiddle" border="0" style="padding-bottom: 2px;"></div><a href="<?php echo WWW.URL('my',$user['user'],EXP.'mess');?>" class="fade">{$user.mess} 条未读提醒</a></div>
+                        <div class="inner"><div class="fr" id="money"><a href="{php echo WWW.URL('my',$user['user'],EXP.'thread');}" class="balance_area" style="">{$user.gold} <img src="{#WWW}View/v2ex/images/gold.png" alt="S" align="absmiddle" border="0" style="padding-bottom: 2px;"></div><a href="javascript:void(0)" onclick="$('.friend-box').toggleClass('friend-box-a');" class="fade">{$user.mess} 条未读提醒</a></div>
                     </div>
                     {/if}
-          <div class="sep20"></div>
-          <div class="box" id="TopicsHot">
-            <div class="cell">
+            <div class="sep20"></div>
+            <div class="box" id="TopicsHot">
+             <div class="cell">
               <span class="fade">本周热议主题</span></div>
-              {foreach $hy_home_col_view as $v}
+              {foreach $v2ex_col_view as $v}
             <div class="cell from_153473 hot_t_278528">
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
-                  
+
                   <td width="24" valign="middle" align="center">
                     <a href="{php echo WWW.URL('my',$v['user']);}">
                       <img src="{#WWW}{$v.avatar.c}" class="avatar" border="0" align="default" style="max-width: 24px; max-height: 24px;" /></a>
@@ -71,29 +72,25 @@
                     <span class="item_hot_topic_title">
                       <a href="{php echo WWW.URL('thread','',EXP.$v['id']);}">{$v.title}</a></span>
                   </td>
-                   
                 </tr>
               </table>
-            </div>{/foreach}
+            </div>
+          {/foreach}
+           {if view_form('v2ex','right')}
+          <div class="sep20"></div>
+           {$view_form.right}
+          {/if}
           </div>
-<div class="sep20"></div>
-
-<div class="box">
-    <div class="inner">
-        <span class="chevron">›</span> <a href="{php echo WWW.URL('forum','',EXP.forum($forum,$fid,'id'))}" target="_blank">{php echo forum($forum,$fid,'name');}</a>
-    </div>
-</div>
-
 <div class="sep20"></div>
 </div>
 <div id="Main">
  <div class="sep20"></div>
-                
+
 <div class="box">
     <div class="header">
-<div style="float: left; display: inline-block; margin-right: 10px; margin-bottom: initial!important;"><img src="{#WWW}upload/forum{php echo forum($forum,$fid,'id');}.png" onerror="this.src='{#WWW}upload/de.png'" border="0" align="default" width="73" /></div><div class="fr f12"><span class="snow">主题总数</span> <strong class="gray">{$forum[$fid]['threads']}</strong></div><a href="/">首页</a> <span class="chevron">&nbsp;›&nbsp;</span> {php echo forum($forum,$fid,'name');}
+<div style="float: left; display: inline-block; margin-right: 10px; margin-bottom: initial!important;"><img src="{#WWW}upload/forum{php echo forum($forum,$fid,'id');}.png" onerror="this.src='{#WWW}upload/de.png'" border="0" align="default" width="73" /></div><div class="fr f12"><span class="snow">主题总数</span> <strong class="gray">{$forum[$fid]['threads']}</strong></div><a href="/">首页</a> <span class="chevron">&nbsp;›&nbsp;</span>{$forum[$fid]['name']}
     <div class="sep10"></div>
-    <span class="f12 gray">一个轻量的，现代的 web 服务器软件</span>
+    <span class="f12 gray">{$forum[$fid]['html']}</span>
 
     </div>
     <div id="TopicsNode">
@@ -103,69 +100,69 @@
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                   <td width="48" valign="top" align="center">
-                    <a href="<?php echo WWW.URL('my',$v['user']);?>">
+                    <a href="{php HYBBS_URL('my',$v['user']);}">
                       <img src="{#WWW}{$v.avatar.b}" class="avatar" width="48" border="0" align="default" /></a>
                   </td>
                   <td width="10"></td>
                   <td width="auto" valign="middle">
                     <span class="item_title">
-                      <a href="{php echo WWW.URL('thread','',EXP.$v['id']);}">{$v.title}</a></span>
+                      <a href="{php HYBBS_URL('thread',$v['tid']);}">{$v.title}</a></span>
                     <div class="sep5"></div>
                     <span class="small fade">
                       <div class="votes"></div>
-                      <strong><a href="{php echo WWW.URL('my',$v['user']);}">{$v.user}</a></strong>&nbsp;•&nbsp; {php echo humandate($v['atime']);} {if isset($v['buser'])}&nbsp;•&nbsp; 最后回复来自<strong>
-                        <a href="{php echo WWW.URL('my',$v['buser']);}">{$v.buser}</a></strong>{/if}
+                      <strong><a href="{php HYBBS_URL('my',$v['user']);}">{$v.user}</a></strong>&nbsp;•&nbsp; <?php echo ($v['atime']+86400*30 > NOW_TIME) ? humandate($v['atime']) : date("Y-m-d H:i",$v['atime']);?> {if isset($v['buser'])}&nbsp;•&nbsp; 最后回复来自<strong>
+                        <a href="{php HYBBS_URL('my',$v['buser']);}">{$v.buser}</a></strong>{/if}
                     </span>
                   </td>
                   {if $v['posts']}
                   <td width="70" align="right" valign="middle">
-                <a href="<?php echo WWW.URL('forum','',EXP.$v['fid']); ?>" class="count_livid">{if ($v['btime']+1800) > NOW_TIME}{/if}{$v.posts}</a> 
+                <a href="{php HYBBS_URL('thread',$v['tid']);}" class="count_livid">{if ($v['btime']+1800) > NOW_TIME}{/if}{$v.posts}</a>
             </td>{/if}
                 </tr>
-                
+
               </table>
             </div>
             {/foreach}
             {foreach $data as $v}
-            <div class="cell item" style="">
+            <div class="cell item">
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                   <td width="48" valign="top" align="center">
-                    <a href="<?php echo WWW.URL('my',$v['user']);?>">
+                    <a href="{php HYBBS_URL('my',$v['user']);}">
                       <img src="{#WWW}{$v.avatar.b}" class="avatar" width="48" border="0" align="default" /></a>
                   </td>
                   <td width="10"></td>
                   <td width="auto" valign="middle">
                     <span class="item_title">
-                      <a href="{php echo WWW.URL('thread','',EXP.$v['id']);}">{$v.title}</a></span>
+                      <a href="{php HYBBS_URL('thread',$v['tid']);}">{$v.title}</a></span>
                     <div class="sep5"></div>
                     <span class="small fade">
                       <div class="votes"></div>
-                      <strong><a href="{php echo WWW.URL('my',$v['user']);}">{$v.user}</a></strong>&nbsp;•&nbsp; {php echo humandate($v['atime']);} {if isset($v['buser'])}&nbsp;•&nbsp; 最后回复来自<strong>
-                        <a href="{php echo WWW.URL('my',$v['buser']);}">{$v.buser}</a></strong>{/if}
+                      <strong><a href="{php HYBBS_URL('my',$v['user']);}">{$v.user}</a></strong>&nbsp;•&nbsp; <?php echo ($v['atime']+86400*30 > NOW_TIME) ? humandate($v['atime']) : date("Y-m-d H:i",$v['atime']);?> {if isset($v['buser'])}&nbsp;•&nbsp; 最后回复来自<strong>
+                        <a href="{php HYBBS_URL('my',$v['buser']);}">{$v.buser}</a></strong>{/if}
                     </span>
                   </td>
                   {if $v['posts']}
                   <td width="70" align="right" valign="middle">
-                <a href="<?php echo WWW.URL('forum','',EXP.$v['fid']); ?>" class="count_livid">{if ($v['btime']+1800) > NOW_TIME}{/if}{$v.posts}</a> 
+                <a href="{php HYBBS_URL('thread',$v['tid']);}" class="count_livid">{if ($v['btime']+1800) > NOW_TIME}{/if}{$v.posts}</a>
             </td>{/if}
                 </tr>
-            
+
               </table>
             </div>
             {/foreach}
             {hook t_index_index_thread_list_bottom}
     </div>
-    <div class="cell"> 
-    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+
+        <div class="cell">
+          <span class="gray" align="left">第 1 到 {$conf['forumlist']} / 共 {$forum[$fid]['threads']} 个主题</span>
+  {if $page_count!==1}<table cellpadding="0" cellspacing="0" border="0" width="100%">
         <tbody><tr>
-        <td width="92%" align="left"><span class="gray">第 1 到 20 / 共 {$forum[$fid]['threads']} 个主题</span></td>
-            <td width="92%" align="right"><?php $tmp = ($forum[$fid]['threads']%20) ?(intval($forum[$fid]['threads']/20)+1) : intval($forum[$fid]['threads']/20) ; ?>{for $i=($pageid-5 < 1) ? 1 : $pageid -5; $i< (($pageid + 5 > $tmp) ? $tmp+1 : $pageid + 5) ; $i++}<a href="{php echo WWW.URL('forum',$fid.EXP.$type,EXP.$i);}" class="{if $pageid==1}page_normal{else}{if $pageid == $i}page_current{/if}{/if}">{$i}</a> &nbsp;{/for}<!-- <input type="number" class="page_input" autocomplete="off" value="1" min="1" max="13799"  onkeydown = "if (event.keyCode == 13)
-                    location.href = '{#WWW}new/' + this.value" /> --></td>
+            <td width="92%" align="right"><?php $tmp = ($forum[$fid]['threads']%$conf['forumlist']) ?(intval($forum[$fid]['threads']/$conf['forumlist'])+1) : intval($forum[$fid]['threads']/$conf['forumlist']) ; ?>{for $i=($pageid-5 < 1) ? 1 : $pageid -5; $i< (($pageid + 5 > $tmp) ? $tmp+1 : $pageid + 5) ; $i++}<a href="{php HYBBS_URL('forum',$fid,[$type=>$i]);}" class="{if $pageid !== $i}page_normal{else}{if $pageid == $i}page_current{/if}{/if}">{$i}</a> &nbsp;{/for}</td>
         </tr>
-    </tbody></table>
+    </tbody></table>{/if}
 </div>
 </div>
-</div> 
+</div>
 </div>
 {include f}

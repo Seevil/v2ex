@@ -12,34 +12,23 @@
             请在标题中描述内容要点。如果一件事情在标题的长度内就已经可以说清楚，那就没有必要写正文了。
             <div class="sep10"></div>
             </li>
-            <li><span class="f13">选择节点</span><div class="sep10"></div>
-            在最后，请为你的主题选择一个节点。恰当的归类会让你发布的信息更加有用。
+            <li><span class="f13">选择板块</span><div class="sep10"></div>
+            在最后，请为你的主题选择一个板块。恰当的归类会让你发布的信息更加有用。
             <div class="sep10"></div>
-            你可以在主题发布后 300 秒内，对标题或者正文进行编辑。同时，在 300 秒内，你可以重新为主题选择节点。
+            你可以在主题发布后，对标题或者正文进行编辑。同时，你可以重新为主题选择板块。
             </li>
         </ul>
     </div>
 </div>
-<div class="sep20"></div>
-<div class="box">
-<div class="cell">社区指导原则</div>
-    <div class="inner">
-        <ul style="margin-top: 0px;">
-            <li><span class="f13">尊重原创</span><div class="sep10"></div>
-            请不要在 V2EX 发布任何盗版下载链接，包括软件、音乐、电影等等。V2EX 是创意工作者的社区，我们尊重原创。
-            <div class="sep10"></div>
-            </li>
-            <li><span class="f13">友好互助</span><div class="sep10"></div>
-            保持对陌生人的友善。用知识去帮助别人。
-            </li>
-        </ul>
-    </div>
-</div>
+{php $view_inc = get_view_inc("v2ex")}
+{if $view_inc['postinfo']}
+{$view_inc.postinfo}
+{/if}
 </div>
 <div id="Main">
 <div class="sep20"></div>          
 <div class="box" id="box">
-    <div class="cell"><a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span> 创作新主题</div>
+    <div class="cell"><a href="/">{$conf.title}</a> <span class="chevron">&nbsp;›&nbsp;</span> 创作新主题</div>
     <div class="cell">
       {hook t_post_index_1}
       {hook t_post_index}

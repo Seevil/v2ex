@@ -1,0 +1,120 @@
+<div id="Rightbar">
+          <div class="sep20"></div>
+          {if !IS_LOGIN}
+          <div class="box">
+            <div class="cell">
+              <strong>{php echo view_form('v2ex','title')}</strong>
+              <div class="sep5"></div>
+              <span class="fade">{php echo view_form('v2ex','info')}</span></div>
+            <div class="inner">
+              <div class="sep5"></div>
+              <div align="center">
+                <a href="{php HYBBS_URL('user','add');}" class="super normal button">现在注册</a>
+                <div class="sep5"></div>
+                <div class="sep10"></div>已注册用户请 &nbsp;
+                <a href="{php HYBBS_URL('user','login');}">登录</a></div>
+            </div>
+          </div>
+          {else}
+          <div class="box">
+                        <div class="cell">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tbody><tr>
+                                    <td width="48" valign="top"><a href="<?php HYBBS_URL('my',$user['user']);?>"><img src="{#WWW}{$user.avatar.b}" class="avatar" border="0" align="default" style="max-width: 48px; max-height: 48px;"></a></td>
+                                    <td width="10" valign="top"></td>
+                                    <td width="auto" align="left"><span class="bigger"><a href="<?php HYBBS_URL('my',$user['user']);?>">{$user.user}</a></span>
+                                        <div class="sep5"></div>
+                                        <span class="fade">{$user.ps}</span>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                            <div class="sep10"></div>
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tbody><tr>
+                                    <td width="33%" align="center"><a href="{php HYBBS_URL('my',$user['user'],'thread');}" class="dark" style="display: block;"><span class="bigger">{$user.threads}</span><div class="sep3"></div><span class="fade">我的帖子</span></a></td>
+                                    <td width="34%" style="border-left: 1px solid rgba(100, 100, 100, 0.4); border-right: 1px solid rgba(100, 100, 100, 0.4);" align="center"><a href="{php HYBBS_URL('my',$user['user'],'post');}" class="dark" style="display: block;"><span class="bigger">{$user.posts}</span><div class="sep3"></div><span class="fade">主题回复</span></a></td>
+                                    <td width="33%" align="center"><a href="javascript:void(0)" onclick="$('.friend-box').toggleClass('friend-box-a');" class="dark" style="display: block;"><span class="bigger">{$user.follow}</span><div class="sep3"></div><span class="fade">特别关注</span></a></td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                        <div class="cell" style="padding: 5px;">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tbody><tr>
+                                    <td width="32"><a href="{php HYBBS_URL('post','');}"><img src="{#WWW}View/v2ex/images/flat_compose.png" width="32" border="0"></a></td>
+                                    <td width="10"></td>
+                                    <td width="auto" valign="middle" align="left"><a href="{php HYBBS_URL('post','');}">创作新主题</a></td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                        <div class="inner"><div class="fr" id="money"><a href="{php  HYBBS_URL('my',$user['user'],'thread');}" class="balance_area" style="">{$user.gold} <img src="{#WWW}View/v2ex/images/gold.png" alt="S" align="absmiddle" border="0" style="padding-bottom: 2px;"></div><a href="javascript:void(0)" onclick="$('.friend-box').toggleClass('friend-box-a');" class="fade">{$user.mess} 条未读提醒</a></div>
+                    </div>
+                    {/if}
+            <div class="sep20"></div>
+            <div class="box" id="TopicsHot">
+             <div class="cell">
+              <span class="fade">本周热议主题</span></div>
+              {foreach $v2ex_col_view as $v}
+            <div class="cell from_153473 hot_t_278528">
+              <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+
+                  <td width="24" valign="middle" align="center">
+                    <a href="{php HYBBS_URL('my',$v['user']);}">
+                      <img src="{#WWW}{$v.avatar.c}" class="avatar" border="0" align="default" style="max-width: 24px; max-height: 24px;" /></a>
+                  </td>
+                  <td width="10"></td>
+                  <td width="auto" valign="middle">
+                    <span class="item_hot_topic_title">
+                      <a href="{php HYBBS_URL('thread',$v['tid']);}">{$v.title}</a></span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {/foreach}
+          </div>
+          <div class="sep20"></div>
+          <div class="box">
+            <div class="cell">
+              <div class="fr"></div>
+              <span class="fade">板块列表</span></div>
+            <div class="cell">
+            {foreach $forum as $key => $v}
+			<a href="<?php HYBBS_URL('forum',$v['id']); ?>" class="item_node">{$v.name}</a>
+			{/foreach}
+			
+              </div>
+          </div>
+          {if ACTION_NAME == 'Index'}
+          <div class="sep20"></div>
+          <div class="box">
+            <div class="cell">
+              <span class="fade">社区运行状况</span></div>
+            <div class="cell">
+              <table cellpadding="5" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td width="50" align="right">
+                    <span class="gray">注册会员</span></td>
+                  <td width="auto" align="left">
+                    <strong>{$hy_count.user}</strong></td>
+                </tr>
+                <tr>
+                  <td width="50" align="right">
+                    <span class="gray">主题</span></td>
+                  <td width="auto" align="left">
+                    <strong>{$hy_count.thread}</strong></td>
+                </tr>
+                <tr>
+                  <td width="50" align="right">
+                    <span class="gray">回复</span></td>
+                  <td width="auto" align="left">
+                    <strong>{$hy_count.post}</strong></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          {/if}
+          {if view_form('v2ex','right')}
+          <div class="sep20"></div>
+           {$view_form.right}
+          {/if}
+        </div>
