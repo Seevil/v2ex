@@ -12,7 +12,7 @@
 <?php
 $tmp_str = '';
   while ($tmp_fid != -1) {
-    $tmp_str='<span class="chevron">&nbsp;›&nbsp;</span><a href="' .WWW.URL('forum','',EXP.forum($forum,$tmp_fid,'id')).'">'.forum($forum,$tmp_fid,'name').'</a>'.$tmp_str;
+    $tmp_str='<span class="chevron">&nbsp;›&nbsp;</span><a href="' .HYBBS_URLA('forum','',forum($forum,$tmp_fid,'id')).'">'.forum($forum,$tmp_fid,'name').'</a>'.$tmp_str;
     if(forum($forum,$tmp_fid,'fid') != -1){
       $tmp_fid = forum($forum,$tmp_fid,'fid');
     }else{
@@ -22,11 +22,11 @@ $tmp_str = '';
   echo $tmp_str;
 ?>
     <span class="chevron">&nbsp;›&nbsp;</span>
-    <a href="{php echo WWW.URL('forum','',EXP.forum($forum,$thread_data['fid'],'id'))}">{php echo forum($forum,$thread_data['fid'],'name');}</a>
+    <a href="{php HYBBS_URL('forum','',forum($forum,$thread_data['fid'],'id'))}">{php echo forum($forum,$thread_data['fid'],'name');}</a>
     <div class="sep10"></div>
     <h1>{$thread_data.title}</h1>
     <div id="topic_280756_votes" class="votes">
-<a href="javascript:void(0);"onclick="tp('thread1',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-up"></span> <span style="padding:0">{$thread_data.goods}</span></a> &nbsp;<a href="javascript:void(0);"onclick="tp('thread2',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-down"></span> <span style="padding:0">{$thread_data.nos}</span></a></div> &nbsp; <small class="gray"><a href="{php HYBBS_URL('my',$thread_data['user']);}">{$thread_data.user}</a> · {php echo humandate($thread_data['atime']);} · {$thread_data['views']} 次点击 &nbsp; </small>
+<a href="javascript:void(0);"onclick="tp('thread1',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-up"></span> <span style="padding:0">{$thread_data.goods}</span></a> &nbsp;<a href="javascript:void(0);"onclick="tp('thread2',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-down"></span> <span style="padding:0">{$thread_data.nos}</span></a></div> &nbsp; <small class="gray"><a href="{php HYBBS_URL('my',$thread_data['user']);}">{$thread_data.user}</a> · <?php echo ($thread_data['atime']+86400*120 > NOW_TIME) ? humandate($thread_data['atime']) : date("Y-m-d H:i",$v['atime']);?> · {$thread_data['views']} 次点击 &nbsp; </small>
     </div>
     <div class="cell">
         <div class="topic_content">
@@ -99,7 +99,7 @@ $tmp_str = '';
 {if $thread_data['posts']}
 <div class="sep20"></div>
 <div class="box">
-<div class="cell"><span class="gray">{$thread_data.posts} 回复 &nbsp;<strong class="snow">|</strong> &nbsp;直到 {php echo humandate($thread_data['btime']);}</span>
+<div class="cell"><span class="gray">{$thread_data.posts} 回复 &nbsp;<strong class="snow">|</strong> &nbsp;直到 {php echo ($thread_data['btime']+86400*120 > NOW_TIME) ? humandate($thread_data['btime']) : date("Y-m-d H:i",$v['btime']);}</span>
     </div>
         {foreach $PostList as $k => $v}
         <div id="r_3203585" class="cell">
@@ -109,7 +109,7 @@ $tmp_str = '';
                 <td width="10" valign="top"></td>
                 <td width="auto" valign="top" align="left"><div class="fr">{if IS_LOGIN }  {if $v['uid'] == NOW_UID || NOW_GID == C("ADMIN_GROUP")}<div id="thank" class="thank_area"><a href="{php HYBBS_URL('post','edit',['id'=>$v['pid']]); }" class="thank">编辑</a>{/if}{if $v['uid'] == NOW_UID || NOW_GID == C("ADMIN_GROUP") || is_forumg($forum,NOW_UID,$thread_data['fid'])} &nbsp; &nbsp; &nbsp; <a href="javascript:void(0);" onclick="del_thread({$v.pid},'post')" class="thank">删除帖子</a></div>{/if}{/if}&nbsp;&nbsp; <span class="no">{php echo ($k+(($pageid-1)*$conf['postlist'])) ;}</span></div>
                     <div class="sep3"></div>
-                    <strong><a href="{php HYBBS_URL('my',$v['user']);}" class="dark">{$v.user}</a></strong>&nbsp; &nbsp;<span class="fade small">{$v.atime_str}</span>
+                    <strong><a href="{php HYBBS_URL('my',$v['user']);}" class="dark">{$v.user}</a></strong>&nbsp; &nbsp;<span class="fade small">{php echo ($v['atime']+86400*120 > NOW_TIME) ? humandate($v['atime']) : date("Y-m-d H:i",$v['atime']);}</span>
                     <div class="sep5"></div>
                     <div class="reply_content">
                     <!--{hook t_post_content_top}-->
