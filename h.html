@@ -36,18 +36,18 @@
                   <img src="{#WWW}View/v2ex/images/logo@2x.png" border="0" align="default" alt="{$conf.title}" width="94" height="30" /></a>
               </td>
               <td width="auto" align="left">
-                        <div id="Search"><form action="{php HYBBS_URL('search')}"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-image: url('{#WWW}View/v2ex/images/qbar_light@2x.png'); background-repeat: no-repeat; display: inline-block;"><input type="text" maxlength="40" name="key" id="q" value=""></div></form></div>
+                        <div id="Search"><form action="{php HYBBS_URL('search')}"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-image: url('{#WWW}View/v2ex/images/qbar_light@2x.png'); background-repeat: no-repeat; display: inline-block;"><input type="hidden" name="s" value="search"><input type="text" maxlength="40" name="key" id="q" value=""></div></form></div>
                </td>
-               
+
               <td width="570" align="right" style="padding-top: 2px;">
                 <a href="" class="top">首页</a>&nbsp;&nbsp;&nbsp;
                 {if view_form('v2ex','diy_h')}
 				{php $tmp = explode("\r\n",view_form('v2ex','diy_h'))}
-				
+
 				{foreach $tmp as $v}
 					{php $tmp1 = explode(",",$v)}
 					<a href="{$tmp1[0]}"  {if $tmp1[2]==1}target="_blank"{/if}>{$tmp1[1]}</a>&nbsp;&nbsp;&nbsp;
-					
+
 				{/foreach}
 			{/if}
               {if !IS_LOGIN}
