@@ -26,7 +26,7 @@ $tmp_str = '';
     <div class="sep10"></div>
     <h1>{$thread_data.title}</h1>
     <div id="topic_280756_votes" class="votes">
-<a href="javascript:void(0);"onclick="tp('thread1',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-up"></span> <span style="padding:0">{$thread_data.goods}</span></a> &nbsp;<a href="javascript:void(0);"onclick="tp('thread2',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-down"></span> <span style="padding:0">{$thread_data.nos}</span></a></div> &nbsp; <small class="gray"><a href="{php HYBBS_URL('my',$thread_data['user']);}">{$thread_data.user}</a> · <?php echo ($thread_data['atime']+86400*120 > NOW_TIME) ? humandate($thread_data['atime']) : date("Y-m-d H:i",$v['atime']);?> · {$thread_data['views']} 次点击 &nbsp; </small>
+<a href="javascript:void(0);"onclick="tp('thread1',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-up"></span> <span style="padding:0">{$thread_data.goods}</span></a> &nbsp;<a href="javascript:void(0);"onclick="tp('thread2',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-down"></span> <span style="padding:0">{$thread_data.nos}</span></a></div> &nbsp; <small class="gray"><a href="{php HYBBS_URL('my',$thread_data['user']);}">{$thread_data.user}</a> · <?php echo ($thread_data['atime']+86400*120 > NOW_TIME) ? humandate($thread_data['atime']) : date("Y-m-d H:i",$thread_data['atime']);?> · {$thread_data['views']} 次点击 &nbsp; </small>
     </div>
     <div class="cell">
         <div class="topic_content">
@@ -48,9 +48,9 @@ $tmp_str = '';
         </div>
     </div>
     {if IS_LOGIN }
-    <?php $arr = explode(",",forum($forum,$thread_data['fid'],'forumg')); ?>
     <div class="topic_buttons">
       <div class="fr gray f11" style="line-height: 12px; padding-top: 3px; text-shadow: 0px 1px 0px #fff;">{$thread_data['views']} 次点击 &nbsp;∙&nbsp; {$thread_data.goods} 人支持 &nbsp; </div>
+	  <?php $arr = explode(",",forum($forum,$thread_data['fid'],'forumg')); ?>
       {if $thread_data['uid'] == NOW_UID || NOW_GID == C("ADMIN_GROUP") || is_forumg($forum,NOW_UID,$thread_data['fid'])}
       <a href="{php HYBBS_URL('post','edit',['id'=>$post_data['pid']]); }" class="tb">编辑</a>
       <a href="javascript:void(0);" onclick="del_thread({$thread_data.tid},'thread')" class="tb">删除</a>
@@ -99,7 +99,7 @@ $tmp_str = '';
 {if $thread_data['posts']}
 <div class="sep20"></div>
 <div class="box">
-<div class="cell"><span class="gray">{$thread_data.posts} 回复 &nbsp;<strong class="snow">|</strong> &nbsp;直到 {php echo ($thread_data['btime']+86400*120 > NOW_TIME) ? humandate($thread_data['btime']) : date("Y-m-d H:i",$v['btime']);}</span>
+<div class="cell"><span class="gray">{$thread_data.posts} 回复 &nbsp;<strong class="snow">|</strong> &nbsp;直到 {php echo ($thread_data['btime']+86400*120 > NOW_TIME) ? humandate($thread_data['btime']) : date("Y-m-d H:i",$thread_data['btime']);}</span>
     </div>
         {foreach $PostList as $k => $v}
         <div id="r_3203585" class="cell">
