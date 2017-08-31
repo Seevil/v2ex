@@ -24,7 +24,7 @@ $tmp_str = '';
     <span class="chevron">&nbsp;›&nbsp;</span>
     <a href="{php HYBBS_URL('forum','',forum($forum,$thread_data['fid'],'id'))}">{php echo forum($forum,$thread_data['fid'],'name');}</a>
     <div class="sep10"></div>
-    <h1>{$thread_data.title}</h1>
+    <h1>{$thread_data.title}{if $thread_data['state']}<span title="禁止回复" style="color: brown;"> - 已锁定</span>{/if}</h1>
     <div id="topic_280756_votes" class="votes">
 <a href="javascript:void(0);"onclick="tp('thread1',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-up"></span> <span style="padding:0">{$thread_data.goods}</span></a> &nbsp;<a href="javascript:void(0);"onclick="tp('thread2',{$thread_data.tid},this)" class="vote"><span class="icon-chevron-down"></span> <span style="padding:0">{$thread_data.nos}</span></a></div> &nbsp; <small class="gray"><a href="{php HYBBS_URL('my',$thread_data['user']);}">{$thread_data.user}</a> · <?php echo ($thread_data['atime']+86400*120 > NOW_TIME) ? humandate($thread_data['atime']) : date("Y-m-d H:i",$thread_data['atime']);?> · {$thread_data['views']} 次点击 &nbsp; </small>
     </div>
