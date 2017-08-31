@@ -28,12 +28,12 @@
                   <img src="{#WWW}View/v2ex/images/logo@2x.png" border="0" align="default" alt="{$conf.logo}" width="94" height="30" /></a>
               </td>
               <td width="auto" align="left">
-                        <div id="Search"><form action="{#WWW}search"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-image: url('{#WWW}View/v2ex/images/qbar_light@2x.png'); background-repeat: no-repeat; display: inline-block;"><input type="text" maxlength="40" name="key" id="q" value=""></div></form></div>
+                        <div id="Search"><form action="{php HYBBS_URL('search')}"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-image: url('{#WWW}View/v2ex/images/qbar_light@2x.png'); background-repeat: no-repeat; display: inline-block;"><input type="hidden" name="s" value="search"><input type="text" maxlength="40" name="key" id="q" value=""></div></form></div>
                </td>
               <td width="570" align="right" style="padding-top: 2px;">
                 <a href="" class="top">首页</a>&nbsp;&nbsp;
-                <a href="{#WWW}user{#EXP}add" class="top">注册</a>&nbsp;&nbsp;
-                <a href="{#WWW}user{#EXP}login" class="top">登录</a>
+                <a href="{php HYBBS_URL('user','add')}" class="top">注册</a>&nbsp;&nbsp;
+                <a href="{php HYBBS_URL('user','login')}" class="top">登录</a>
                  </td>
             </tr>
           </table>
@@ -46,11 +46,10 @@
         <div id="Rightbar">
           <div class="sep20"></div>
           <div class="box">
-            {php $view_inc = get_view_inc("v2ex")}
             <div class="cell">
-              <strong>{$view_inc.title}</strong>
+              <strong>{php echo view_form('v2ex','title')}</strong>
               <div class="sep5"></div>
-              <span class="fade">{$view_inc.info}</span></div>
+              <span class="fade">{php echo view_form('v2ex','info')}</span></div>
             <div class="inner">
               <div class="sep5"></div>
               <div align="center">
@@ -63,10 +62,10 @@
 </div>
 <div id="Main">
 <div class="sep20"></div>
-                
+
 <div class="box">
     <div class="header"><a href="/">首页</a> <span class="chevron">&nbsp;›&nbsp;</span>找回密码</div>
-    
+
     <div class="inner">
         <form id="form">
         <table cellpadding="5" cellspacing="0" border="0" width="100%">
@@ -103,51 +102,50 @@
 <script>
 var send_b = false;
 function send_code(obj){
-  // if(send_b)
-  //  return ;
-   var _this = $(obj);
-  // send_b=true;
-  
-  
-  //_this.attr("disabled","disabled");
-  //_this.css("color","#757575");
-  $.ajax({
-    url: '{#WWW}user{#EXP}recode',
-    type:"POST",
-    cache: false,
-    data:{
-      email:$("#email").val(),
-      {hook t_user_repass_js_1}
-    },
-    dataType: 'json'
-  }).then(function(e) {
-    {hook t_user_repass_js_2}
-    if(e.error){
-      swal("发送成功","请到你的"+$("#email").val()+"查看邮件获得验证码,可能邮件会被放入垃圾箱或已删除",'success');
-    }else{
-      swal('发送失败',e.info,'error');
-    }
-    {hook t_user_repass_js_3}
-  }, function() {
-   swal("发送失败",'服务器繁忙');
-  });
-    
+	// if(send_b)
+	// 	return ;
+	 var _this = $(obj);
+	// send_b=true;
+	_this.attr("disabled","disabled").css("color","#757575").text('正在发送中...');
+	$.ajax({
+		url: '{php HYBBS_URL('user','recode')}',
+		type:'POST',
+		cache: false,
+		data:{
+			email:$('#email').val(),
+			<!--{hook t_user_repass_js_1}-->
+		},
+		dataType: 'json'
+	}).then(function(e) {
+		<!--{hook t_user_repass_js_2}-->
+		_this.removeAttr("disabled","disabled").css("color","#46699E").text('点击获取验证码');
+
+		if(e.error){
+			swal("发送成功","请到你的"+$("#email").val()+"查看验证码,可能垃圾邮件",'success');
+		}else{
+			swal('发送失败',e.info,'error');
+		}
+		<!--{hook t_user_repass_js_3}-->
+	}, function() {
+		_this.removeAttr("disabled","disabled").css("color","#46699E").text('点击获取验证码');
+	 swal("发送失败",'服务器繁忙');
+	});
 }
 $(function(){
     $('#form').submit(function() {return false;});
     $("#repass").click(function(){
         var postdata = $('#form').serialize();
-        {hook t_user_repass_js_4}
-        $.post("{#WWW}user{#EXP}recode2", postdata,  function(e){
-          {hook t_user_repass_js_5}
+        <!--{hook t_user_repass_js_4}-->
+        $.post("{php HYBBS_URL('user','recode2')}", postdata,  function(e){
+        	<!--{hook t_user_repass_js_5}-->
             if(e.error){
-                swal("修改成功","密码修改成功,请自行登录!",'success');
+                swal("修改成功","密码修改成功",'success');
             }else{
-              swal("修改失败", e.info, "error");
+            	swal("修改失败", e.info, "error");
             }
-            {hook t_user_repass_js_6}
+            <!--{hook t_user_repass_js_6}-->
         },'json');
-        {hook t_user_repass_js_7}
+        <!--{hook t_user_repass_js_7}-->
     })
 });
 </script>

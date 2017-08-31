@@ -29,12 +29,12 @@
                   <img src="{#WWW}View/v2ex/images/logo@2x.png" border="0" align="default" alt="V2EX" width="94" height="30" /></a>
               </td>
               <td width="auto" align="left">
-                        <div id="Search"><form action="{#WWW}search"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-image: url('{#WWW}View/v2ex/images/qbar_light@2x.png'); background-repeat: no-repeat; display: inline-block;"><input type="text" maxlength="40" name="key" id="q" value=""></div></form></div>
+                       <div id="Search"><form action="{php HYBBS_URL('search')}"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-image: url('{#WWW}View/v2ex/images/qbar_light@2x.png'); background-repeat: no-repeat; display: inline-block;"><input type="hidden" name="s" value="search"><input type="text" maxlength="40" name="key" id="q" value=""></div></form></div>
                </td>
               <td width="570" align="right" style="padding-top: 2px;">
                 <a href="" class="top">首页</a>&nbsp;&nbsp;
-                <a href="{#WWW}user{#EXP}add" class="top">注册</a>&nbsp;&nbsp;
-                <a href="{#WWW}user{#EXP}login" class="top">登录</a>
+                <a href="{php HYBBS_URL('user','add');}" class="top">注册</a>&nbsp;&nbsp;
+                <a href="{php HYBBS_URL('user','login');}" class="top">登录</a>
                  </td>
             </tr>
           </table>
@@ -45,16 +45,16 @@
 <div class="content">
 <div id="Leftbar"></div>
             <div id="Rightbar">
-                <div class="sep20"></div>            
+                <div class="sep20"></div>
 <div class="box">
 <div class="header">其他登录方式</div>
 <div class="cell" style="text-align: center;">
-<a onclick="location.href = '{#WWW}user{#EXP}qqlogin';" href="#" class="qq-signin"><span class="icon-qq"></span>&nbsp;&nbsp;使用 QQ 登录</a>
+<a onclick="location.href = '{php HYBBS_URL('user','qqlogin');}';" href="#" class="qq-signin"><span class="icon-qq"></span>&nbsp;&nbsp;使用 QQ 登录</a>
 </div>
 </div>
  </div>
 <div id="Main">
- <div class="sep20"></div>           
+ <div class="sep20"></div>
 <div class="box">
     <div class="header"><a href="/">首页</a> <span class="chevron">&nbsp;›&nbsp;</span> 登录 &nbsp;<span class="icon-lock"></span></div>
     <div class="message" onclick="$(this).slideUp('fast');">你要查看的页面需要先登录</div>
@@ -79,30 +79,38 @@
             </tr>
             <tr>
                 <td width="120" align="right"></td>
-                <td width="auto" align="left"><a href="{#WWW}user{#EXP}repass">我忘记密码了</a></td>
+                <td width="auto" align="left"><a href="{php HYBBS_URL('user','repass');}">我忘记密码了</a></td>
             </tr>
-        </table>  
+        </table>
         </form>
-    </div> 
+    </div>
 </div>
 </div>
 </div>
 <script>
 $(function(){
+	$("#user").blur(function(){
+		$.get("{php HYBBS_URL('ajax','useravatar');}",{user:$(this).val()},function(e){
+			$("#img").attr('src',"{#WWW}"+e.b)
+		},'json');
+	});
     $('#form').submit(function() {return false;});
     $("#login").click(function(){
         var postdata = $('#form').serialize();
-        {hook t_user_login_js_1}
-        $.post("{#WWW}user{#EXP}login", postdata,  function(e){
-            {hook t_user_login_js_2}
+        <!--{hook t_user_login_js_1}-->
+        $.post("{php HYBBS_URL('user','login');}", postdata,  function(e){
+        	<!--{hook t_user_login_js_2}-->
             if(e.error){
-                window.location.href="{#WWW}";
+                if(e.url !='' && e.url != 'NULL' && e.url != 'null')
+                    window.location.href=e.url;
+                else
+                    window.location.href="{#WWW}";
             }else{
-                swal(e.error ? "登录成功 - 正在为你跳转" : "登录失败", e.info, e.error ? "success" : "error");
+            	swal(e.error ? "登录成功" : "登录失败", e.info, e.error ? "success" : "error");
             }
-            {hook t_user_login_js_3}
+            <!--{hook t_user_login_js_3}-->
         },'json');
-        {hook t_user_login_js_4}
+        <!--{hook t_user_login_js_4}-->
     })
 });
 </script>
