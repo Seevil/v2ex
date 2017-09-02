@@ -2,7 +2,7 @@
 $Thread = M('Thread');
 $v2ex_col_view = $this->CacheObj->get('v2ex_col_view');
 if(empty($v2ex_col_view) || DEBUG){
-	$v2ex_col_view = $Thread->select('*',array('atime[>]'=>NOW_TIME - 2592000,"ORDER" => "views DESC","LIMIT" => array(0, 10)));
+	$v2ex_col_view = $Thread->select('*',array('atime[>]'=>NOW_TIME - 2592000,"ORDER" => ['views'=>'DESC'],"LIMIT" => array(0, 10)));
 	$Thread->format($v2ex_col_view);
 	$this->CacheObj->set('v2ex_col_view',$v2ex_col_view);
 }
