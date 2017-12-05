@@ -4,7 +4,7 @@ hybbs仿v2ex主题模板
 
 登陆模板 填写本模板名称即可，用户中心还没弄，发表回复按钮，自己修改一下编辑器的样式，css继承坑壁的要死所以手动修改的编辑器。
 
-在线预览：http://basaltic.cn/ 也可在此社区交流。
+在线预览：http://basaltic.cn/ 也可在此社区交流。vps内核崩了数据全丢了新的演示地址：https://bbs.xde.io/
 
 logo 在/images/目录下 logo@2x.png 文件
 
