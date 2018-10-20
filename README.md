@@ -6,8 +6,12 @@ hybbs仿v2ex主题模板
 
 <s>在线预览：http://basaltic.cn/ 也可在此社区交流。</s>
 
-vps内核崩了数据全丢了新的演示地址：https://bbs.xde.io/
+<s>vps内核崩了数据全丢了新的演示地址：https://bbs.xde.io/</s>
 
+已经弃坑hybbs =。=
+
+预览：
+![v2ex](https://github.com/Seevil/v2ex/blob/master/back.png) 
 logo 在/images/目录下 logo@2x.png 文件
 
 这是我直接从线上拉下来的，有些修改是针对我的站的大家使用的时候自己斟酌修改。
